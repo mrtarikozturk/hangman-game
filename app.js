@@ -106,3 +106,32 @@ function showNotification(){
         notification.classList.remove('show');
     }, 2000);
 }
+
+// Press keys
+window.addEventListener('keydown', e => {
+
+    // console.log(e.key.charCodeAt(0) >= 97 && e.key.charCodeAt(0) <= 122);
+
+    
+    if (e.key.charCodeAt(0) >= 97 && e.key.charCodeAt(0) <= 122) {
+        const letter = e.key;
+
+        if (selectedWord.includes(letter)) {
+            if (!correctLetters.includes(letter)) {
+                correctLetters.push(letter);
+                displayWord();
+            }else{
+                showNotification();
+            }
+        }else{
+            if (!wrongLetters.includes(letter)) {
+                wrongLetters.push(letter);
+                updateWrongLetterEl();
+
+            }else{
+                showNotification();
+            }
+        }
+    }
+
+});
