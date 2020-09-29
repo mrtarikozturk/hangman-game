@@ -7,16 +7,21 @@ const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
-const words = ['application', 'programming', 'interface', 'wizard'];
+
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-const correctLetters = ['w', 'i', 'z', 'a', 'r', 'd'];
+const correctLetters = [];
 const wrongLetters = [];
+
+displayWord();
+
 
 function displayWord() {
 
-    for (let i = 0; i < selectedWord.split('').length; i++) {
+  
+    /****************************************************
+      for (let i = 0; i < selectedWord.split('').length; i++) {
         let item = selectedWord.split('')[i];
 
         if (correctLetters.includes(item)) {
@@ -26,19 +31,30 @@ function displayWord() {
         }        
     }
     console.log(wordEl.textContent);
+    ****************************************************/
+    
+    wordEl.innerHTML = `
+        ${selectedWord.split('').map(letter => `<span class= "letter">${correctLetters.includes(letter) ? letter : ''}</span>`).join('')}
+    `;
+    
 
    /****************************************************
       console.log(wordEl.textContent);
     console.log(wordEl.innerText);
 
-    Bu ikisi farkli ciktilar verir. Ilki div icindeki span etiketleri icindeki text'leri alt alta yazdirirken ikincisi span etiketleri icindeki text'leri yan yana yazdirir. 
+    Bu ikisi farkli ciktilar verir. Ilki div icindeki span etiketleri icindeki text'leri yan yana yazdirirken ikincisi span etiketleri icindeki text'leri alt alta yazdirir. 
    ****************************************************/
    
-   const innerWord = wordEl.textContent.trim();
+//    const innerWord = wordEl.textContent.trim();
+
+   const innerWord = wordEl.innerText.replace(/\n/g, '');
+
+
    console.log(innerWord);
    console.log(finalMessage);
 
-   if (innerWord === selectedWord) {
+  /****************************************************
+     if (innerWord === selectedWord) {
        
        finalMessage.innerHTML = 'Congratulations! You won!';
     popup.style.display = 'flex';
@@ -46,9 +62,37 @@ function displayWord() {
    }
    else{
     finalMessage.innerHTML = '';
-
    }
+  ****************************************************/
+  
+  if (innerWord === selectedWord) {
+      finalMessage.innerText = 'Congratulations! You won!';
+      popup.style.display = 'flex';
+  }
    
 }
 
-displayWord();
+// Update the wrong letters
+function updateWrongLetterEl(){
+ 
+    wrongLettersEl.innerHTML = `
+    ${wrongLetters.length>0 ? `<p>Wrong</p>` : ''}
+    ${wrongLetters.map(letter => `<span>${letter}</span>`)}    
+    `;
+
+    figureParts.forEach((part, index) => {
+        const errors = wrongLetters.length;
+
+        if (index < errors) {
+            part.style.display = 'block';
+        } else {
+            part.style.display = 'none';
+        }
+    });
+
+    // Check if lost
+    if (wrongLetters.length === figureParts.length) {
+        finalMessage.innerText = 'Unfortunately you lost';
+        popup.style.display = 'flex'; 
+    }
+}

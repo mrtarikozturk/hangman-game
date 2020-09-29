@@ -133,5 +133,5 @@ p{
 }
 
 .notification-container.show{
-    transform: translateY(-5opx);
+    transform: translateY(-50px);
 }
