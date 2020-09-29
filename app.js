@@ -109,7 +109,7 @@ function showNotification(){
 
 // Press keys
 window.addEventListener('keydown', e => {
-
+    
     // console.log(e.key.charCodeAt(0) >= 97 && e.key.charCodeAt(0) <= 122);
 
     
@@ -134,4 +134,19 @@ window.addEventListener('keydown', e => {
         }
     }
 
+});
+
+
+// Play again
+playAgainBtn.addEventListener('click', () => {
+    
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
+
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+
+    displayWord();
+    updateWrongLetterEl();
+    popup.style.display = 'none';
+      
 });
