@@ -7,8 +7,6 @@ const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part');
 
-
-
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 const correctLetters = [];
@@ -16,9 +14,7 @@ const wrongLetters = [];
 
 displayWord();
 
-
 function displayWord() {
-
   
     /****************************************************
       for (let i = 0; i < selectedWord.split('').length; i++) {
@@ -97,7 +93,6 @@ function updateWrongLetterEl(){
     }
 }
 
-
 //Show notification
 function showNotification(){
     notification.classList.add('show');
@@ -135,7 +130,6 @@ window.addEventListener('keydown', e => {
     }
 
 });
-
 
 // Play again
 playAgainBtn.addEventListener('click', () => {
